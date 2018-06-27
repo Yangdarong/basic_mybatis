@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper  
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间,作用就是对sql进行分类话管理,理解sql隔离  -->
+<mapper namespace="test">  
+	
+	<!-- 通过select执行数据库的查询 
+		statement的标识ID		对象被封装到 mappedStatement 中
+		
+		parameterType 输入的参数类型
+		resultType	      输出的对象类型
+		需求： 通过 id 查询用户表的记录
+	-->
+	<select id="findUserById" parameterType="int" resultType="com.yang.mybatis.po.User">    
+		select * from user_info where user_id = #{user_id}  
+	</select> 
+</mapper>

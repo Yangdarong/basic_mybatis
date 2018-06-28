@@ -20,5 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	 -->
 	<mappers>
 		<mapper resource="config/sqlmap/User.xml"/>
+		
+		<mapper resource="config/mapper/UserMapper.xml"/>
 	</mappers>
 </configuration>

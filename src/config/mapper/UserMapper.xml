@@ -3,8 +3,10 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- namespace命名空间,作用就是对sql进行分类话管理,理解sql隔离  -->
-<mapper namespace="test">  
+<!-- namespace命名空间,作用就是对sql进行分类话管理,理解sql隔离  
+	使用mapper代理方法开发,namespace 有特殊重要的作用,namespace 等于 mapper 接口地址
+-->
+<mapper namespace="com.yang.mybatis.mapper.UserMapper">  
 	
 	<!-- 通过select执行数据库的查询 
 		statement的标识ID		对象被封装到 mappedStatement 中

@@ -2,6 +2,7 @@ package com.yang.mybatis.first;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -36,6 +37,59 @@ public class MybatisFirst {
 		System.out.println(user);
 		
 		// 释放资源
+		sqlSession.close();
+	}
+	
+	// 根据用户名称 模糊查询
+	@Test
+	public void findUserByNameTest() throws IOException {
+		//MyBatis 配置文件
+		String resource = "config/SqlMapConfig.xml";
+		
+		// 得到配置文件流
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+		
+		// 创建会话工厂, 传入mybatis的配置文件信息
+		SqlSessionFactory sqlSessionFactory = new  SqlSessionFactoryBuilder().build(inputStream);
+		
+		// 通过工厂得到SqlSession 
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		List<User> result = sqlSession.selectList("test.findUserByName", "m");
+				
+		System.out.println(result);
+		
+		sqlSession.close();
+	}
+	
+	// 添加用户
+	@Test
+	public void insertUserTest() throws IOException {
+		//MyBatis 配置文件
+		String resource = "config/SqlMapConfig.xml";
+		
+		// 得到配置文件流
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+		
+		// 创建会话工厂, 传入mybatis的配置文件信息
+		SqlSessionFactory sqlSessionFactory = new  SqlSessionFactoryBuilder().build(inputStream);
+		
+		// 通过工厂得到SqlSession 
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		User user = new User();
+		user.setUser_name("tony");
+		user.setUser_passwd("123");
+		user.setUser_privilege(0);
+		
+		sqlSession.insert("test.insertUser", user);
+		
+		//需要手动提交
+		sqlSession.commit();
+		
+		// 获取用户ID
+		System.out.println(user.getUser_id());
+		
 		sqlSession.close();
 	}
 }
